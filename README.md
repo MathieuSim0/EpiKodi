@@ -1,37 +1,40 @@
-# EpiKodi - Media Center Moderne 🎬🎵📺
+# EpiKodi - Plateforme de Streaming Moderne 🎬📺⭐
 
-EpiKodi est un media center complet développé en C++ avec Qt 6, avec une **interface moderne inspirée de Netflix** permettant de rechercher et gérer films, séries et musique via des APIs publiques.
+Application web moderne de gestion multimédia avec intégration TMDb pour films et séries. Interface style Netflix développée avec React et TypeScript.
 
 ## ✨ Interface Moderne
 
-- 🎨 **Design Netflix-like** avec dégradés rouges signature
-- 🃏 **Grille de cartes interactives** pour les films et séries
-- 🖼️ **Posters haute qualité** chargés automatiquement
-- ✨ **Animations fluides** au survol et à la sélection
-- 🎯 **Navigation intuitive** avec onglets et recherche optimisée
+- 🎨 **Design Netflix-like** avec palette de couleurs signature
+- 🃏 **Grille de cartes responsive** pour les films et séries
+- 🖼️ **Posters haute qualité** via TMDb API
+- 🎥 **Bandes-annonces YouTube** intégrées directement dans les détails
+- 🎯 **Navigation par onglets** fluide et intuitive
+- ⭐ **Système de favoris** avec persistance locale
 
 ## ✨ Fonctionnalités
 
-- 🎥 **Films & Séries** : Recherche et affichage via TheMovieDB (TMDb)
-- 🎵 **Musique** : Recherche d'artistes et albums via MusicBrainz + Cover Art Archive
-- ▶️ **Lecteur Multimédia** : Lecture de vidéos (trailers) et audio
-- ⭐ **Favoris** : Gestion locale des favoris (fichier JSON)
-- 🎨 **Interface Moderne** : Interface fluide et esthétique avec Qt 6
+- � **Films** : Recherche instantanée et affichage de films populaires via TMDb
+- 📺 **Séries** : Découvrez des séries TV avec détails complets
+- � **Bandes-annonces** : Visionnez les trailers YouTube intégrés
+- ⭐ **Favoris** : Ajoutez et gérez vos contenus préférés (LocalStorage)
+- 🔍 **Recherche rapide** : Trouvez facilement films et séries
+- 📱 **Design responsive** : Interface adaptée à tous les écrans
 
 ## 🛠️ Technologies
 
-- **Langage** : C++17
-- **Framework** : Qt 6 (QtWidgets, QtNetwork, QtMultimedia)
-- **APIs** : TheMovieDB API, MusicBrainz API, Cover Art Archive
-- **JSON** : nlohmann/json
-- **Build System** : CMake
+- **React 18** - Library UI moderne avec hooks
+- **TypeScript** - Typage statique pour plus de sécurité
+- **Vite** - Build tool ultra-rapide avec HMR
+- **Tailwind CSS** - Framework CSS utilitaire
+- **React Player** - Lecteur vidéo YouTube intégré
+- **Axios** - Client HTTP pour appels API
+- **TMDb API v3** - Base de données de films et séries
 
 ## 📋 Prérequis
 
-- **Qt 6.2+** (avec modules Core, Widgets, Network, Multimedia)
-- **CMake 3.16+**
-- **Compilateur C++17** (GCC 7+, Clang 5+, MSVC 2017+)
-- **Git**
+- **Node.js 18+** et npm
+- Clé API TMDb (gratuite - déjà configurée dans le projet)
+- Navigateur web moderne (Chrome, Firefox, Edge, Safari)
 
 ## 🚀 Installation
 
@@ -42,119 +45,121 @@ git clone https://github.com/MathieuSim0/EpiKodi.git
 cd EpiKodi
 ```
 
-### 2. Installer nlohmann/json
+### 2. Installer les dépendances
 
 ```bash
-mkdir -p external
-cd external
-git clone https://github.com/nlohmann/json.git nlohmann
-cd ..
+npm install
 ```
 
-### 3. Configurer les clés API
+### 3. Configurer l'API TMDb (Optionnel)
 
-Copier le fichier de configuration exemple et ajouter votre clé TMDb :
+La clé API est déjà configurée dans `src/services/tmdb.ts`. Pour utiliser votre propre clé :
 
-```bash
-cp config/config.example.json config/config.json
-```
-
-Éditer `config/config.json` et remplacer `YOUR_TMDB_API_KEY_HERE` par votre clé API TMDb.
-
-**Obtenir une clé TMDb** :
 1. Créer un compte sur [TheMovieDB](https://www.themoviedb.org/)
-2. Aller dans Paramètres > API
-3. Demander une clé API (gratuite)
+2. Obtenir votre clé API dans Paramètres > API
+3. Remplacer la clé dans `src/services/tmdb.ts` :
 
-### 4. Compiler le projet
-
-```bash
-mkdir build
-cd build
-cmake ..
-cmake --build .
+```typescript
+const API_KEY = 'VOTRE_CLE_API'
 ```
 
-### 5. Lancer l'application
+### 4. Lancer le serveur de développement
 
 ```bash
-./EpiKodi
+npm run dev
+```
+
+L'application sera accessible sur **http://localhost:3000**
+
+### 5. Build de production
+
+```bash
+npm run build
+npm run preview
 ```
 
 ## 📁 Structure du Projet
 
 ```
 EpiKodi/
-├── CMakeLists.txt              # Configuration CMake principale
-├── README.md                   # Documentation
-├── .gitignore                  # Fichiers à ignorer
-├── config/
-│   └── config.example.json     # Configuration exemple
-├── include/                    # Headers (.h)
-│   ├── api/                    # Clients API
-│   ├── models/                 # Modèles de données
-│   ├── managers/               # Gestionnaires (favoris, etc.)
-│   ├── player/                 # Lecteur multimédia
-│   └── ui/                     # Interface utilisateur
-├── src/                        # Sources (.cpp)
-│   ├── main.cpp                # Point d'entrée
-│   ├── api/
-│   ├── models/
-│   ├── managers/
-│   ├── player/
-│   └── ui/
-├── resources/                  # Ressources Qt
-│   ├── icons/                  # Icônes
-│   ├── styles/                 # Feuilles de style
-│   └── resources.qrc           # Fichier de ressources Qt
-└── external/                   # Bibliothèques externes
-    └── nlohmann/               # nlohmann/json
+├── index.html                  # Template HTML
+├── package.json                # Dépendances npm
+├── vite.config.ts              # Configuration Vite
+├── tailwind.config.js          # Configuration Tailwind CSS
+├── tsconfig.json               # Configuration TypeScript
+├── src/
+│   ├── main.tsx                # Point d'entrée React
+│   ├── App.tsx                 # Composant racine
+│   ├── index.css               # Styles globaux + Tailwind
+│   ├── components/             # Composants React
+│   │   ├── Layout.tsx          # Layout principal
+│   │   ├── Navigation.tsx      # Barre de navigation
+│   │   ├── MediaCard.tsx       # Carte film/série
+│   │   ├── MediaDetails.tsx    # Détails avec trailer
+│   │   └── tabs/               # Onglets
+│   │       ├── MoviesTab.tsx   # Section Films
+│   │       ├── SeriesTab.tsx   # Section Séries
+│   │       ├── MusicTab.tsx    # Section Musique
+│   │       └── FavoritesTab.tsx # Section Favoris
+│   ├── services/               # Services API
+│   │   └── tmdb.ts             # Client TMDb API
+│   ├── context/                # React Context
+│   │   └── FavoritesContext.tsx # Gestion favoris
+│   └── types/                  # Types TypeScript
+│       └── index.ts            # Définitions types
+├── config/                     # Configuration
+└── public/                     # Assets statiques
 ```
 
 ## 🎯 Architecture
 
-### Modules Principaux
+### Composants Principaux
 
-1. **API Clients** (`src/api/`)
-   - `TMDbApiClient` : Recherche de films et séries
-   - `MusicBrainzApiClient` : Recherche d'artistes et albums
+1. **Services** (`src/services/`)
+   - `tmdb.ts` : Client API pour films/séries, gestion images
 
-2. **Modèles** (`src/models/`)
-   - `Movie`, `Series`, `Album`, `Artist` : Structures de données
+2. **Context** (`src/context/`)
+   - `FavoritesContext` : State management des favoris avec LocalStorage
 
-3. **Managers** (`src/managers/`)
-   - `FavoritesManager` : Gestion des favoris (persistence JSON)
+3. **Components** (`src/components/`)
+   - `Layout` : Structure principale de l'app
+   - `Navigation` : Barre de navigation avec onglets
+   - `MediaCard` : Carte réutilisable pour afficher un média
+   - `MediaDetails` : Modal avec détails et lecteur trailer
+   - `tabs/*` : Composants spécialisés par section
 
-4. **Lecteur** (`src/player/`)
-   - `MediaPlayer` : Lecture audio/vidéo avec QtMultimedia
-
-5. **Interface** (`src/ui/`)
-   - `MainWindow` : Fenêtre principale avec navigation
-   - `MovieWidget`, `SeriesWidget`, `MusicWidget` : Vues spécialisées
-   - `FavoritesWidget` : Liste des favoris
-   - `PlayerWidget` : Contrôles du lecteur
+4. **Types** (`src/types/`)
+   - Interfaces TypeScript pour Movie, Series, Video, Favorite
 
 ## 🔧 Utilisation
 
-### Rechercher des Films
+### Navigation
 
-1. Cliquer sur l'onglet **Films**
-2. Entrer un titre dans la barre de recherche
-3. Parcourir les résultats avec posters et descriptions
-4. Cliquer sur un film pour voir les détails et le trailer
+- **Films 🎬** : Découvrez les films populaires ou recherchez par titre
+- **Séries 📺** : Explorez les séries TV tendance
+- **Musique 🎵** : Section à venir (MusicBrainz API)
+- **Favoris ⭐** : Retrouvez tous vos contenus favoris
 
-### Rechercher de la Musique
+### Rechercher du Contenu
 
-1. Cliquer sur l'onglet **Musique**
-2. Rechercher un artiste ou un album
-3. Voir les pochettes d'albums
-4. Lire des extraits audio
+1. Cliquez sur l'onglet Films ou Séries
+2. Utilisez la barre de recherche
+3. Parcourez les résultats avec posters haute qualité
+4. Laisser vide pour voir les contenus populaires
+
+### Voir les Détails et Trailers
+
+1. Cliquez sur une affiche pour ouvrir les détails
+2. La bande-annonce YouTube se charge automatiquement
+3. Consultez le synopsis, la note et l'année de sortie
+4. Utilisez le bouton ❌ en haut à droite pour fermer
 
 ### Gérer les Favoris
 
-- Cliquer sur l'icône ⭐ pour ajouter aux favoris
-- Accéder à tous vos favoris dans l'onglet **Favoris**
-- Les favoris sont sauvegardés dans `favorites.json`
+- **Ajouter** : Cliquez sur 🤍 sur une carte ou dans les détails
+- **Retirer** : Cliquez sur ❤️ pour retirer des favoris
+- **Voir tous** : Onglet Favoris pour voir votre collection
+- **Persistance** : Les favoris sont sauvegardés localement (LocalStorage)
 
 ## 🤝 Contribution
 
