@@ -1,4 +1,4 @@
-# EpiKodi - Plateforme de Streaming Moderne 🎬📺⭐
+# StreamFlow - Plateforme de Streaming Moderne 🎬📺⭐
 
 Application web moderne de gestion multimédia avec intégration TMDb pour films et séries. Interface style Netflix développée avec React et TypeScript.
 
